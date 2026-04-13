@@ -1,0 +1,35 @@
+<view class="container">
+  <!-- 代号和称号 -->
+  <view class="header">
+    <view class="code">{{result.code}}</view>
+    <view class="name">{{result.name}}</view>
+  </view>
+
+  <!-- 维度标签 -->
+  <view class="tags">
+    <view
+      class="tag {{item.level === 'H' ? 'tag-h' : 'tag-l'}}"
+      wx:for="{{tags}}"
+      wx:key="label"
+    >
+      <text class="tag-label">{{item.label}}</text>
+      <text class="tag-value">{{item.tag}}</text>
+    </view>
+  </view>
+
+  <!-- 描述 -->
+  <view class="desc-card">
+    <text class="desc-text">{{result.desc}}</text>
+  </view>
+
+  <!-- 操作按钮 -->
+  <button class="save-btn" bindtap="saveShareImage">保存分享图</button>
+  <button class="retry-btn" bindtap="retry">再测一次</button>
+
+  <!-- 隐藏的 Canvas 用于生成分享图 -->
+  <canvas
+    type="2d"
+    id="shareCanvas"
+    style="width: 375px; height: 500px; position: fixed; left: -9999px;"
+  ></canvas>
+</view>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=375px, initial-scale=1">
+<title>恋爱人格测试 · 预览</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+    background: #e5e5e5;
+    display: flex;
+    gap: 32px;
+    padding: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ── Phone shell ── */
+  .phone {
+    width: 375px;
+    min-height: 720px;
+    background: #fff;
+    border-radius: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .nav-bar {
+    height: 56px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 600;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
+  }
+  .nav-bar.dark { background: #1a1a1a; color: #fff; border-bottom: none; }
+  .page-content {
+    flex: 1;
+    overflow-y: auto;
+  }
+  .page-label {
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+    margin-top: 12px;
+    letter-spacing: 1px;
+  }
+
+  /* ══════════════════════════════
+     PAGE 1 · 首页
+  ══════════════════════════════ */
+  .index-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 664px;
+    padding: 30px 24px;
+  }
+  .hero { text-align: center; margin-bottom: 30px; }
+  .hero-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+  .hero-sub { font-size: 14px; color: #888; }
+  .desc-card {
+    background: #f7f7f7;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+  .desc-card p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .start-btn {
+    width: 100%;
+    height: 52px;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 26px;
+    border: none;
+    letter-spacing: 3px;
+    cursor: pointer;
+  }
+  .footer-note { margin-top: 20px; font-size: 12px; color: #bbb; }
+
+  /* ══════════════════════════════
+     PAGE 2 · 答题页
+  ══════════════════════════════ */
+  .quiz-page { padding: 24px; }
+  .progress-bar {
+    width: 100%;
+    height: 3px;
+    background: #f0f0f0;
+    border-radius: 2px;
+    margin-bottom: 8px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #1a1a1a;
+    border-radius: 2px;
+    width: 33.3%;
+  }
+  .progress-text { font-size: 12px; color: #aaa; margin-bottom: 30px; }
+  .question-card {
+    background: #f7f7f7;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .question-text { font-size: 18px; font-weight: 600; color: #1a1a1a; line-height: 1.6; }
+  .options { display: flex; flex-direction: column; gap: 12px; }
+  .option-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 14px;
+    background: #fff;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .option-item.selected {
+    border-color: #1a1a1a;
+    background: #1a1a1a;
+  }
+  .option-item.selected .option-text { color: #fff; }
+  .option-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #ddd;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+  .option-item.selected .option-dot { background: #fff; }
+  .option-text { font-size: 15px; color: #333; line-height: 1.5; }
+  .back-btn {
+    margin-top: 24px;
+    font-size: 14px;
+    color: #aaa;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  /* ══════════════════════════════
+     PAGE 3 · 结果页
+  ══════════════════════════════ */
+  .result-page {
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .result-header { text-align: center; margin-bottom: 30px; }
+  .result-code { font-size: 16px; color: #aaa; letter-spacing: 6px; font-weight: 300; margin-bottom: 8px; }
+  .result-name { font-size: 38px; font-weight: 700; color: #1a1a1a; letter-spacing: 4px; }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    justify-content: center;
+  }
+  .tag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 10px;
+    min-width: 72px;
+  }
+  .tag-h { background: #1a1a1a; color: #fff; }
+  .tag-l { background: #f0f0f0; color: #555; }
+  .tag-label { font-size: 11px; opacity: .7; margin-bottom: 2px; }
+  .tag-value { font-size: 13px; font-weight: 600; }
+  .result-desc {
+    background: #f7f7f7;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  .result-desc p { font-size: 15px; color: #444; line-height: 1.9; }
+  .save-btn {
+    width: 100%;
+    height: 52px;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 26px;
+    border: none;
+    margin-bottom: 12px;
+    cursor: pointer;
+  }
+  .retry-btn {
+    width: 100%;
+    height: 52px;
+    background: transparent;
+    color: #888;
+    font-size: 15px;
+    border-radius: 26px;
+    border: 1.5px solid #e0e0e0;
+    cursor: pointer;
+  }
+
+  /* Share image canvas preview */
+  .share-preview {
+    width: 280px;
+    height: 373px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
+    margin: 0 auto 24px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .share-top {
+    background: #1a1a1a;
+    flex: 0 0 164px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    position: relative;
+  }
+  .share-code { font-size: 13px; color: rgba(255,255,255,.5); letter-spacing: 4px; margin-bottom: 10px; }
+  .share-name { font-size: 30px; font-weight: 700; color: #fff; letter-spacing: 3px; }
+  .share-tag-row {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    padding: 0 8px 8px;
+    gap: 6px;
+  }
+  .share-tag {
+    flex: 1;
+    background: #e85d75;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 11px;
+    color: #fff;
+    padding: 4px 0;
+  }
+  .share-tag.l { background: #f0f0f0; color: #555; }
+  .share-bottom {
+    background: #fff;
+    flex: 1;
+    padding: 14px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .share-desc { font-size: 12px; color: #555; line-height: 1.7; }
+  .share-footer { font-size: 11px; color: #ccc; text-align: center; }
+</style>
+</head>
+<body>
+
+<!-- ═══ PAGE 1: 首页 ═══ -->
+<div>
+  <div class="page-label">首页</div>
+  <div class="phone" style="margin-top:8px">
+    <div class="nav-bar">恋爱人格测试</div>
+    <div class="page-content">
+      <div class="index-page">
+        <div class="hero">
+          <div class="hero-title">恋爱人格测试</div>
+          <div class="hero-sub">18题 · 约3分钟 · 测出你的恋爱类型</div>
+        </div>
+        <div class="desc-card">
+          <p>每个人在感情里都有独特的方式。<br>这份测试没有好坏之分，<br>只有更了解自己。</p>
+        </div>
+        <button class="start-btn">开始测试</button>
+        <div class="footer-note">结果仅供参考，祝你遇见对的人 ✨</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAGE 2: 答题页 ═══ -->
+<div>
+  <div class="page-label">答题页（第6题 / 共18题）</div>
+  <div class="phone" style="margin-top:8px">
+    <div class="nav-bar">恋爱人格测试</div>
+    <div class="page-content">
+      <div class="quiz-page">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:33.3%"></div>
+        </div>
+        <div class="progress-text">6 / 18</div>
+
+        <div class="question-card">
+          <div class="question-text">分手后你通常？</div>
+        </div>
+
+        <div class="options">
+          <div class="option-item">
+            <div class="option-dot"></div>
+            <span class="option-text">很快调整好状态</span>
+          </div>
+          <div class="option-item selected">
+            <div class="option-dot"></div>
+            <span class="option-text">需要很长时间走出来</span>
+          </div>
+          <div class="option-item">
+            <div class="option-dot"></div>
+            <span class="option-text">理性复盘哪里出了问题</span>
+          </div>
+          <div class="option-item">
+            <div class="option-dot"></div>
+            <span class="option-text">会反复回忆在一起的时光</span>
+          </div>
+        </div>
+
+        <div class="back-btn">← 上一题</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAGE 3: 结果页 ═══ -->
+<div>
+  <div class="page-label">结果页</div>
+  <div class="phone" style="margin-top:8px">
+    <div class="nav-bar">恋爱人格测试</div>
+    <div class="page-content">
+      <div class="result-page">
+        <div class="result-header">
+          <div class="result-code">ZG</div>
+          <div class="result-name">温柔追光者</div>
+        </div>
+
+        <div class="tags">
+          <div class="tag tag-h"><span class="tag-label">亲密主动性</span><span class="tag-value">主动型</span></div>
+          <div class="tag tag-h"><span class="tag-label">情感深度</span><span class="tag-value">感性型</span></div>
+          <div class="tag tag-l"><span class="tag-label">边界感</span><span class="tag-value">融合型</span></div>
+          <div class="tag tag-h"><span class="tag-label">安全感</span><span class="tag-value">自由型</span></div>
+          <div class="tag tag-h"><span class="tag-label">表达方式</span><span class="tag-value">外放型</span></div>
+          <div class="tag tag-h"><span class="tag-label">关系目标</span><span class="tag-value">成长型</span></div>
+        </div>
+
+        <div class="result-desc">
+          <p>你主动追求，保留自我，感性而外放。你在感情里寻找一个并肩而行的伙伴，既深情又不失自我。你对爱充满期待，也知道如何爱得漂亮。</p>
+        </div>
+
+        <!-- 分享图预览 -->
+        <div class="share-preview">
+          <div class="share-top">
+            <div class="share-code">ZG</div>
+            <div class="share-name">温柔追光者</div>
+            <div class="share-tag-row">
+              <div class="share-tag">主动型</div>
+              <div class="share-tag">感性型</div>
+              <div class="share-tag l">融合型</div>
+              <div class="share-tag">外放型</div>
+            </div>
+          </div>
+          <div class="share-bottom">
+            <div class="share-desc">你主动追求，保留自我，感性而外放。你在感情里寻找一个并肩而行的伙伴，既深情又不失自我…</div>
+            <div class="share-footer">恋爱人格测试 · 扫码测测你是哪种</div>
+          </div>
+        </div>
+
+        <button class="save-btn">保存分享图</button>
+        <button class="retry-btn">再测一次</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

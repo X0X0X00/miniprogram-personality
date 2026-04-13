@@ -1,0 +1,30 @@
+<view class="container">
+  <!-- 进度条 -->
+  <view class="progress-bar">
+    <view class="progress-fill" style="width: {{progressPercent}}%"></view>
+  </view>
+  <view class="progress-text">{{current + 1}} / {{total}}</view>
+
+  <!-- 题目卡片 -->
+  <view class="question-card">
+    <view class="question-text">{{currentQuestion.text}}</view>
+  </view>
+
+  <!-- 选项列表 -->
+  <view class="options">
+    <view
+      class="option-item {{selectedIndex === index ? 'selected' : ''}}"
+      wx:for="{{currentQuestion.options}}"
+      wx:key="index"
+      bindtap="selectOption"
+      data-index="{{index}}"
+      data-score="{{item.score}}"
+    >
+      <view class="option-dot"></view>
+      <text class="option-text">{{item.text}}</text>
+    </view>
+  </view>
+
+  <!-- 返回上一题 -->
+  <view class="back-btn {{current === 0 ? 'hidden' : ''}}" bindtap="prevQuestion">← 上一题</view>
+</view>

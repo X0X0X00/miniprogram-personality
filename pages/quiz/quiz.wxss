@@ -1,0 +1,96 @@
+.container {
+  padding: 48rpx;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6rpx;
+  background: #f0f0f0;
+  border-radius: 3rpx;
+  margin-bottom: 16rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #1a1a1a;
+  border-radius: 3rpx;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 24rpx;
+  color: #aaa;
+  margin-bottom: 60rpx;
+}
+
+.question-card {
+  background: #f7f7f7;
+  border-radius: 24rpx;
+  padding: 48rpx;
+  margin-bottom: 48rpx;
+}
+
+.question-text {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+  border: 2rpx solid #e8e8e8;
+  border-radius: 20rpx;
+  background: #fff;
+  transition: all 0.2s;
+}
+
+.option-item.selected {
+  border-color: #1a1a1a;
+  background: #1a1a1a;
+}
+
+.option-item.selected .option-text {
+  color: #fff;
+}
+
+.option-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background: #ddd;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+
+.option-item.selected .option-dot {
+  background: #fff;
+}
+
+.option-text {
+  font-size: 30rpx;
+  color: #333;
+  line-height: 1.5;
+}
+
+.back-btn {
+  margin-top: 48rpx;
+  font-size: 28rpx;
+  color: #aaa;
+  text-align: center;
+}
+
+.hidden {
+  visibility: hidden;
+}

@@ -1,0 +1,65 @@
+<view class="container">
+
+  <!-- 契合度大圆圈 -->
+  <view class="score-ring-wrap">
+    <view class="score-ring">
+      <view class="score-num">{{score}}</view>
+      <view class="score-label">{{labelInfo.label}}</view>
+    </view>
+  </view>
+
+  <!-- 两人人格 -->
+  <view class="person-row">
+    <view class="person-card">
+      <view class="person-role">我</view>
+      <view class="person-name">{{myResult.name}}</view>
+      <view class="person-code">{{myResult.code}}</view>
+    </view>
+    <view class="heart">♡</view>
+    <view class="person-card">
+      <view class="person-role">TA</view>
+      <view class="person-name">{{partnerResult.name}}</view>
+      <view class="person-code">{{partnerResult.code}}</view>
+    </view>
+  </view>
+
+  <!-- 契合描述 -->
+  <view class="compat-desc">{{labelInfo.desc}}</view>
+
+  <!-- 维度对比 -->
+  <view class="section-title">维度对比</view>
+  <view class="dim-rows">
+    <view class="dim-row" wx:for="{{dimRows}}" wx:key="label">
+      <view class="dim-label">{{item.label}}</view>
+      <view class="dim-bars">
+        <view class="dim-bar {{item.myHL === 'H' ? 'h-bar' : 'l-bar'}}">
+          <text>{{item.myTag}}</text>
+        </view>
+        <view class="dim-score-badge">{{item.score}}</view>
+        <view class="dim-bar {{item.partnerHL === 'H' ? 'h-bar' : 'l-bar'}}">
+          <text>{{item.partnerTag}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最强/最弱维度 -->
+  <view class="insight-cards">
+    <view class="insight-card best">
+      <view class="insight-icon">✨</view>
+      <view class="insight-dim">最强契合：{{insights.strongest.label}}</view>
+      <view class="insight-score">{{insights.strongest.score}}分</view>
+    </view>
+    <view class="insight-card concern">
+      <view class="insight-icon">⚡</view>
+      <view class="insight-dim">最需关注：{{insights.weakest.label}}</view>
+      <view class="insight-score">{{insights.weakest.score}}分</view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <button class="save-btn" bindtap="saveShareImage">保存分享图</button>
+  <canvas type="2d" id="shareCanvas" style="width:375px;height:500px;position:fixed;left:-9999px;top:-9999px;"></canvas>
+  <button class="retry-btn" bindtap="retry">重新开始</button>
+
+</view>

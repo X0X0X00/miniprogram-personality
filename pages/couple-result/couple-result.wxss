@@ -1,0 +1,202 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48rpx 40rpx 80rpx;
+}
+
+.score-ring-wrap {
+  margin: 40rpx 0 48rpx;
+}
+
+.score-ring {
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 50%;
+  border: 12rpx solid #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-num {
+  font-size: 88rpx;
+  font-weight: 900;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 26rpx;
+  color: #888;
+  margin-top: 8rpx;
+}
+
+.person-row {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  margin-bottom: 32rpx;
+  width: 100%;
+}
+
+.person-card {
+  flex: 1;
+  background: #f7f7f7;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  text-align: center;
+}
+
+.person-role {
+  font-size: 24rpx;
+  color: #888;
+  margin-bottom: 8rpx;
+}
+
+.person-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.person-code {
+  font-size: 22rpx;
+  color: #aaa;
+  margin-top: 6rpx;
+}
+
+.heart {
+  font-size: 48rpx;
+  color: #e85d75;
+}
+
+.compat-desc {
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  line-height: 1.7;
+  margin-bottom: 48rpx;
+  padding: 0 8rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  align-self: flex-start;
+  margin-bottom: 24rpx;
+}
+
+.dim-rows {
+  width: 100%;
+  margin-bottom: 40rpx;
+}
+
+.dim-row {
+  margin-bottom: 20rpx;
+}
+
+.dim-label {
+  font-size: 24rpx;
+  color: #888;
+  margin-bottom: 8rpx;
+}
+
+.dim-bars {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.dim-bar {
+  flex: 1;
+  height: 52rpx;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22rpx;
+}
+
+.h-bar {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.l-bar {
+  background: #f0f0f0;
+  color: #555;
+}
+
+.dim-score-badge {
+  width: 64rpx;
+  text-align: center;
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.insight-cards {
+  display: flex;
+  gap: 24rpx;
+  width: 100%;
+  margin-bottom: 48rpx;
+}
+
+.insight-card {
+  flex: 1;
+  border-radius: 20rpx;
+  padding: 28rpx 20rpx;
+  text-align: center;
+}
+
+.insight-card.best {
+  background: #f0fff4;
+  border: 2rpx solid #b2f0c6;
+}
+
+.insight-card.concern {
+  background: #fff5f5;
+  border: 2rpx solid #f0b2b2;
+}
+
+.insight-icon {
+  font-size: 40rpx;
+  margin-bottom: 8rpx;
+}
+
+.insight-dim {
+  font-size: 24rpx;
+  color: #555;
+  margin-bottom: 8rpx;
+}
+
+.insight-score {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.save-btn {
+  width: 100%;
+  height: 96rpx;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 48rpx;
+  border: none;
+  margin-bottom: 24rpx;
+}
+
+.retry-btn {
+  width: 100%;
+  height: 88rpx;
+  background: transparent;
+  color: #888;
+  font-size: 30rpx;
+  border-radius: 44rpx;
+  border: 2rpx solid #e0e0e0;
+}

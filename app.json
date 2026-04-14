@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/quiz/quiz",
-    "pages/result/result"
+    "pages/result/result",
+    "pages/couple-room/couple-room",
+    "pages/couple-result/couple-result"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -10,6 +12,7 @@
     "navigationBarTitleText": "恋爱人格测试",
     "navigationBarTextStyle": "black"
   },
-"style": "v2",
+  "cloud": true,
+  "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

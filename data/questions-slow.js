@@ -1,7 +1,7 @@
 // 慢速模式题库 — 30题，5题/维度
 // 维度顺序: intimacy, emotion, boundary, security, expression, goal
 // 每题4选项，A/B = score 0，C/D = score 1
-// 阈值: score >= 3 → H（由 quiz.js 传给 scoresToKey）
+// 阈值: score >= 3 → H（threshold=3 将由 quiz.js 传给 scoresToKey，见 Task 6）
 
 const questions = [
   // === intimacy（亲密主动性）===

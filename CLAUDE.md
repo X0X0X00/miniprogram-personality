@@ -44,11 +44,46 @@ open preview.html
 **阈值**：`score >= 2` → H（高端），`score <= 1` → L（低端）。  
 6个维度按固定顺序 `intimacy / emotion / boundary / security / expression / goal` 拼成6位字符串（如 `"HHLHLL"`），精确匹配 `results.js` 中的 `key` 字段；无精确匹配则用**汉明距离**找最近的人格类型。
 
+### 模式系统
+
+- `globalData.mode = 'fast' | 'slow'` 控制加载哪个题库和使用哪个阈值
+- 快速模式：18题，threshold=2（`data/questions-fast.js`）
+- 慢速模式：30题，threshold=3（`data/questions-slow.js`）
+- `globalData.coupleMode = true` 时，quiz 结束后调用云函数 `submitResult` 并跳转等待页
+
+### 情侣模式云函数
+
+三个云函数在 `cloudfunctions/` 目录，需通过微信开发者工具上传部署（右键函数目录 → 上传并部署：云端安装依赖）：
+- `createRoom`：生成4位房间码，创建 rooms 集合文档
+- `joinRoom`：验证码，注册 playerB
+- `submitResult`：写入结果，双方均完成时将 status 置为 `both_ready`
+
+云DB集合 `rooms` 权限：所有用户可读，仅创建者可写。
+
+### 逻辑验证（不依赖微信运行时）
+
+```bash
+# 验证 compat.js
+node -e "
+  const { calcCompatibility, compatLabel } = require('./utils/compat')
+  const s = calcCompatibility('HHHHHL', 'HHHHHL')
+  console.log(s, compatLabel(s).label)
+"
+
+# 验证慢速模式题库
+node -e "
+  const { questions } = require('./data/questions-slow')
+  const dims = {}
+  questions.forEach(q => { dims[q.dimension] = (dims[q.dimension] || 0) + 1 })
+  console.log('Total:', questions.length, '| Per dim:', dims)
+"
+```
+
 ### 数据文件
 
 - `data/dimensions.js` — 维度顺序**不能改变**，`scoresToKey()` 和 `buildDimensionTags()` 依赖此顺序
 - `data/results.js` — 每条记录的 `key` 必须是合法的6位 H/L 字符串；现有16种未覆盖所有64种组合，靠汉明距离兜底
-- `data/questions.js` — 每个维度恰好3题；`score` 字段只能是 `0` 或 `1`
+- `data/questions-fast.js` — 18道题目（快速模式）；`data/questions-slow.js` — 30道题目（慢速模式）
 
 ### Canvas 分享图（`pages/result/result.js`）
 

@@ -1,0 +1,57 @@
+<view class="container">
+
+  <!-- 创建房间：显示房间码 + 等待对方加入 -->
+  <view wx:if="{{state === 'create_waiting'}}">
+    <view class="state-icon">🔗</view>
+    <view class="state-title">把房间码发给 TA</view>
+    <view class="room-code">{{roomCode}}</view>
+    <view class="state-hint">等待对方加入中…</view>
+    <view class="loading-dots">
+      <view class="dot"></view>
+      <view class="dot"></view>
+      <view class="dot"></view>
+    </view>
+  </view>
+
+  <!-- 加入房间：输入房间码 -->
+  <view wx:if="{{state === 'join_input'}}">
+    <view class="state-icon">💌</view>
+    <view class="state-title">输入对方的房间码</view>
+    <input
+      class="code-input"
+      type="number"
+      maxlength="4"
+      placeholder="4位数字"
+      bindinput="onCodeInput"
+      value="{{inputCode}}"
+    />
+    <button
+      class="confirm-btn {{inputCode.length === 4 ? '' : 'disabled'}}"
+      bindtap="confirmJoin"
+      disabled="{{inputCode.length !== 4}}"
+    >确认加入</button>
+    <view wx:if="{{joinError}}" class="error-text">{{joinError}}</view>
+  </view>
+
+  <!-- 等待对方完成答题 -->
+  <view wx:if="{{state === 'waiting_partner'}}">
+    <view class="state-icon">⏳</view>
+    <view class="state-title">你已完成！</view>
+    <view class="state-hint">等待对方答完…</view>
+    <view class="loading-dots">
+      <view class="dot"></view>
+      <view class="dot"></view>
+      <view class="dot"></view>
+    </view>
+    <view wx:if="{{waitSeconds >= 300}}" class="timeout-hint">
+      对方可能已离开，
+      <text class="link" bindtap="goHome">返回首页重新开始</text>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view wx:if="{{state === 'loading'}}">
+    <view class="state-hint">处理中…</view>
+  </view>
+
+</view>

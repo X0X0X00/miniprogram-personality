@@ -2,14 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 100vh;
-  padding: 60rpx 48rpx;
+  padding: 60rpx 48rpx 80rpx;
 }
 
 .hero {
   text-align: center;
-  margin-bottom: 60rpx;
+  margin-bottom: 48rpx;
+  margin-top: 60rpx;
 }
 
 .title {
@@ -29,7 +29,7 @@
   background: #f7f7f7;
   border-radius: 24rpx;
   padding: 40rpx;
-  margin-bottom: 80rpx;
+  margin-bottom: 64rpx;
   width: 100%;
 }
 
@@ -39,20 +39,118 @@
   line-height: 1.8;
 }
 
-.start-btn {
+.mode-section {
   width: 100%;
-  height: 96rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  margin-bottom: 48rpx;
+}
+
+.mode-btn {
+  width: 100%;
+  height: 120rpx;
+  border-radius: 20rpx;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+}
+
+.mode-btn.primary {
   background: #1a1a1a;
   color: #fff;
+}
+
+.mode-btn.secondary {
+  background: #f0f0f0;
+  color: #1a1a1a;
+}
+
+.mode-btn-title {
   font-size: 34rpx;
   font-weight: 600;
-  border-radius: 48rpx;
+  letter-spacing: 2rpx;
+}
+
+.mode-btn-sub {
+  font-size: 24rpx;
+  opacity: 0.6;
+}
+
+.couple-section {
+  width: 100%;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-bottom: 48rpx;
+}
+
+.couple-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx 40rpx;
+}
+
+.couple-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.couple-arrow {
+  font-size: 28rpx;
+  color: #888;
+  transition: transform 0.2s;
+}
+
+.couple-arrow.open {
+  transform: rotate(180deg);
+}
+
+.couple-panel {
+  display: none;
+  padding: 0 40rpx 40rpx;
+}
+
+.couple-panel.expanded {
+  display: block;
+}
+
+.couple-desc {
+  font-size: 26rpx;
+  color: #888;
+  margin-bottom: 32rpx;
+  line-height: 1.6;
+}
+
+.couple-btns {
+  display: flex;
+  gap: 24rpx;
+}
+
+.couple-btn {
+  flex: 1;
+  height: 88rpx;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  background: #1a1a1a;
+  color: #fff;
   border: none;
-  letter-spacing: 4rpx;
+}
+
+.couple-btn.outline {
+  background: transparent;
+  color: #1a1a1a;
+  border: 2rpx solid #1a1a1a;
 }
 
 .footer-note {
-  margin-top: 40rpx;
   font-size: 24rpx;
   color: #bbb;
+  margin-top: auto;
 }

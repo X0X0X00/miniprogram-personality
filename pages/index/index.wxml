@@ -1,11 +1,39 @@
 <view class="container">
   <view class="hero">
     <view class="title">恋爱人格测试</view>
-    <view class="subtitle">18题 · 约3分钟 · 测出你的恋爱类型</view>
+    <view class="subtitle">测出你独特的恋爱人格类型</view>
   </view>
+
   <view class="desc-card">
     <text class="desc-text">每个人在感情里都有独特的方式。\n这份测试没有好坏之分，\n只有更了解自己。</text>
   </view>
-  <button class="start-btn" bindtap="startQuiz">开始测试</button>
-  <view class="footer-note">结果仅供参考，祝你遇见对的人 ✨</view>
+
+  <!-- 单人模式 -->
+  <view class="mode-section">
+    <button class="mode-btn primary" bindtap="startFast">
+      <view class="mode-btn-title">快速测试</view>
+      <view class="mode-btn-sub">18题 · 约3分钟</view>
+    </button>
+    <button class="mode-btn secondary" bindtap="startSlow">
+      <view class="mode-btn-title">深度测试</view>
+      <view class="mode-btn-sub">30题 · 约8分钟</view>
+    </button>
+  </view>
+
+  <!-- 情侣模式入口 -->
+  <view class="couple-section">
+    <view class="couple-header" bindtap="toggleCouple">
+      <text class="couple-title">情侣模式</text>
+      <text class="couple-arrow {{coupleExpanded ? 'open' : ''}}">▾</text>
+    </view>
+    <view class="couple-panel {{coupleExpanded ? 'expanded' : ''}}">
+      <view class="couple-desc">两人各自答题，查看你们的契合度分析</view>
+      <view class="couple-btns">
+        <button class="couple-btn" bindtap="createRoom">创建房间</button>
+        <button class="couple-btn outline" bindtap="joinRoom">加入房间</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer-note">结果仅供参考，祝你遇见对的人</view>
 </view>

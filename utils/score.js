@@ -21,10 +21,11 @@ function calcDimensionScores(answers) {
  * 将维度得分转换为 H/L 字符串
  * 维度顺序: intimacy, emotion, boundary, security, expression, goal
  * @param {Object} scores
+ * @param {number} threshold - 判断 H/L 的阈值，默认为 2
  * @returns {string} 如 "HHLHLL"
  */
-function scoresToKey(scores) {
-  return dimensions.map(d => scores[d.id] >= 2 ? 'H' : 'L').join('')
+function scoresToKey(scores, threshold = 2) {
+  return dimensions.map(d => scores[d.id] >= threshold ? 'H' : 'L').join('')
 }
 
 /**
@@ -67,13 +68,14 @@ function matchResult(key) {
 /**
  * 将维度得分和 H/L 转换为展示用的标签数组
  * @param {Object} scores
+ * @param {number} threshold - 判断 H/L 的阈值，默认为 2
  * @returns {Array} [{label, level, tag}]
  */
-function buildDimensionTags(scores) {
+function buildDimensionTags(scores, threshold = 2) {
   return dimensions.map(d => ({
     label: d.label,
-    level: scores[d.id] >= 2 ? 'H' : 'L',
-    tag: scores[d.id] >= 2 ? d.high : d.low,
+    level: scores[d.id] >= threshold ? 'H' : 'L',
+    tag: scores[d.id] >= threshold ? d.high : d.low,
   }))
 }
 

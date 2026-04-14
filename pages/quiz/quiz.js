@@ -4,11 +4,11 @@ Page({
   data: {
     questions: [],
     current: 0,
-    total: 18,
+    total: 0,
     selectedIndex: -1,
     progressPercent: 0,
     currentQuestion: {},
-    answers: [], // [{dimension, score, optionIndex}]
+    answers: [],
   },
 
   onLoad() {
@@ -25,8 +25,6 @@ Page({
     const { index, score } = e.currentTarget.dataset
     const optionIndex = parseInt(index)
     this.setData({ selectedIndex: optionIndex })
-
-    // 延迟300ms后跳下一题，给用户看到选中效果
     setTimeout(() => {
       this._recordAndNext(score, optionIndex)
     }, 300)
@@ -40,13 +38,7 @@ Page({
 
     const next = current + 1
     if (next >= questions.length) {
-      // 答完，计算结果
-      const scores = calcDimensionScores(newAnswers)
-      const key = scoresToKey(scores)
-      const result = matchResult(key)
-      const tags = buildDimensionTags(scores)
-      getApp().globalData.quizResult = { result, tags, key }
-      wx.redirectTo({ url: '/pages/result/result' })
+      this._finishQuiz(newAnswers)
       return
     }
 
@@ -59,13 +51,48 @@ Page({
     })
   },
 
+  _finishQuiz(answers) {
+    const app = getApp()
+    // slow mode uses threshold 3, fast uses 2
+    const threshold = app.globalData.mode === 'slow' ? 3 : 2
+    const scores = calcDimensionScores(answers)
+    const key = scoresToKey(scores, threshold)
+    const result = matchResult(key)
+    const tags = buildDimensionTags(scores, threshold)
+    app.globalData.quizResult = { result, tags, key }
+
+    if (app.globalData.coupleMode) {
+      // 情侣模式：提交结果到云DB，然后去等待页
+      wx.showLoading({ title: '提交中...' })
+      wx.cloud.callFunction({
+        name: 'submitResult',
+        data: {
+          roomId: app.globalData.roomId,
+          role: app.globalData.myRole,
+          result: { key, name: result.name },
+        },
+        success() {
+          wx.hideLoading()
+          // 跳转回 couple-room 的等待态
+          wx.redirectTo({ url: '/pages/couple-room/couple-room?action=waiting' })
+        },
+        fail(err) {
+          wx.hideLoading()
+          console.error('submitResult failed', err)
+          wx.showToast({ title: '提交失败，请重试', icon: 'none' })
+        },
+      })
+    } else {
+      wx.redirectTo({ url: '/pages/result/result' })
+    }
+  },
+
   prevQuestion() {
     const { current, answers, questions } = this.data
     if (current === 0) return
     const prev = current - 1
     const prevAnswer = answers[prev]
     const prevSelectedIndex = prevAnswer !== undefined ? prevAnswer.optionIndex : -1
-
     this.setData({
       current: prev,
       currentQuestion: questions[prev],
